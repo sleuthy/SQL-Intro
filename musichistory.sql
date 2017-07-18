@@ -12,10 +12,9 @@ select g.Label, g.Genreid
 from Genre g;
 
 --Using the INSERT statement, add one of your favorite artists to the Artist table.
+--Fix this insert function
 insert into Artist
 values (null, "The Rolling Stones", 1963);
-insert into Artist (ArtistName, YearEstablished)
-values ("Big Scary", 2005);
 
 --Using the INSERT statement, add one, or more, albums by your artist to the Album table.
 insert into Album
@@ -89,5 +88,6 @@ select s.Title, max(s.SongLength)
 from Song s;
 
 --Modify the previous query to also display the title of the album.
-select s.Title, al.Title, max(s.SongLength)
-from Song s, Album al;
+select s.Title "Song Title", al.Title "Album Title", max(s.SongLength)
+from Song s, Album al
+where al.AlbumId = s.AlbumId;
