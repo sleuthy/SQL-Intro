@@ -19,7 +19,7 @@ values ("Big Scary", 2005);
 
 --Using the INSERT statement, add one, or more, albums by your artist to the Album table.
 insert into Album
-values (null, "Four Seasons", 1971, 50, "Rolling Stones", 29, 2);
+values (null, "Four Seasons", 1971, 50, "Rolling Stones", 28, 2);
 
 --Using the INSERT statement, add some songs that are on that album to the Song table.
 insert into Song
@@ -40,7 +40,8 @@ order by a.ArtistName desc;
 select s.Title as "Song Title", al.Title as "Album Title", a.ArtistName
 from Song s, Album al, Artist a
 where s.AlbumId = al.AlbumId
-and s.ArtistId = a.ArtistId;
+and s.ArtistId = a.ArtistId
+and s.ArtistId = 28;
 
 
 select s.Title as "Song Title", al.Title as "Album Title", a.ArtistName
@@ -68,11 +69,25 @@ group by al.title;
 
 
 --Write a SELECT statement to display how many songs exist for each artist. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
+select a.ArtistName, count(s.SongId)
+from Artist a, Song s
+where a.ArtistId = s.ArtistId
+group by a.ArtistId;
 
 --Write a SELECT statement to display how many songs exist for each genre. You'll need to use the COUNT() function and the GROUP BY keyword sequence.
+select g.GenreId, count(s.SongId)
+from Genre g, Song s
+where g.GenreId = s.GenreId
+group by g.GenreId;
 
 --Using MAX() function, write a select statement to find the album with the longest duration. The result should display the album title and the duration.
+select al.Title, max(al.AlbumLength)
+from Album al;
 
 --Using MAX() function, write a select statement to find the song with the longest duration. The result should display the song title and the duration.
+select s.Title, max(s.SongLength)
+from Song s;
 
 --Modify the previous query to also display the title of the album.
+select s.Title, al.Title, max(s.SongLength)
+from Song s, Album al;
